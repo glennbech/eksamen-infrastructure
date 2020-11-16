@@ -1,5 +1,5 @@
 resource "google_cloud_run_service" "hello" {
-  name = "helloworld-service"
+  name = "container-runner"
   location = "us-central1"
   project = var.project_id
 
