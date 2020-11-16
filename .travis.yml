@@ -1,0 +1,27 @@
+env:
+  global:
+    - GCP_PROJECT_ID=terraform-292215
+    - tf_version=0.12.19
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+before_install:
+  - openssl aes-256-cbc -K $encrypted_d62ff51cb74a_key -iv $encrypted_d62ff51cb74a_iv
+    -in terraform.json.enc -out terraform.json -d
+  - curl https://sdk.cloud.google.com | bash > /dev/null
+  - source "$HOME/google-cloud-sdk/path.bash.inc"
+  - gcloud auth activate-service-account --key-file=terraform.json
+  - gcloud config set project "${GCP_PROJECT_ID}"
+  - export GOOGLE_APPLICATION_CREDENTIALS=./terraform.json
+  - wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip
+  - unzip terraform_"$tf_version"_linux_amd64.zip
+  - sudo mv terraform /usr/local/bin/
+  - rm terraform_"$tf_version"_linux_amd64.zip
+install: true
+script:
+  - |-
+    set -ex;
+    export STATUSCAKE_KEY=$(gcloud secrets versions access latest --secret=STATUSCAKE_APIKEY)
+    export TF_VAR_logz_token=$LOGZ_TOKEN
+    terraform init
+    terraform plan
+    terraform apply --auto-approve
+    terraform output
