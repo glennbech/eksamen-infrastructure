@@ -25,7 +25,7 @@ script:
     set -ex;
 
     export TF_VAR_logz_token=$LOGZ_TOKEN
-    terraform init
+    terraform init -reconfigure
     terraform plan
     terraform apply --auto-approve
     terraform output
