@@ -24,6 +24,10 @@ script:
   - |-
     set -ex;
 
+    export STATUSCAKE_KEY=$(gcloud secrets versions access latest --secret=STATUSCAKE_APIKEY)
+    echo 'I might later use secret manager to set $STATUSCAKE_KEY'
+    echo $STATUSAKE_KEY
+
     export TF_VAR_logz_token=$LOGZ_TOKEN
     terraform init
     terraform plan
