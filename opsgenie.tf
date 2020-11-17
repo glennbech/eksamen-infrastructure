@@ -11,20 +11,10 @@ resource "opsgenie_user" "first_test_user" {
   username = "first_test_user@gmail.com"
   full_name = "First Test User"
   role = "User"
-  user_address {
-    country = "Norway"
-    city = "Oslo"
-    zipcode = "0952"
-  }
 }
 
 resource "opsgenie_user" "second_test_user" {
   username = "second_test_user@gmail.com"
   full_name = "Second Test User"
   role = "User"
-  user_address {
-    country = "Bosnia"
-    city = "Tuzla"
-    zipcode = "75000"
-  }
 }
