@@ -5,7 +5,7 @@ provider "statuscake" {
 
 resource "statuscake_test" "google_status_cake" {
   website_name = "My container app"
-  website_url  = google_cloud_run_service.cards.status[0].url
+  website_url  = "${google_cloud_run_service.cards.status[0].url}/api"
   test_type    = "HTTP"
   check_rate   = 100
   contact_group = ["194947"]
