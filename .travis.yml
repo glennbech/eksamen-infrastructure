@@ -24,7 +24,7 @@ script:
   - |-
     set -ex;
 
-    export STATUSCAKE_KEY=$(gcloud secrets versions access latest --secret=STATUSCAKE_APIKEY)
+    export STATUSCAKE_KEY=$(gcloud secrets versions access latest --secret=STATUSCAKE_KEY)
     echo 'I might later use secret manager to set $STATUSCAKE_KEY'
     echo status is: $STATUSAKE_KEY
 
