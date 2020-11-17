@@ -20,3 +20,20 @@ resource "opsgenie_user" "second_test_user" {
   role = "User"
   timezone  = "Europe/Oslo"
 }
+
+#https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/team
+#Adde previously made users to team with members of users
+resource "opsgenie_team" "eksam_team" {
+  name        = "Eksam team"
+  description = "This team is going to handle card api"
+
+  member {
+    id   = opsgenie_user.first_test_user
+    role = "admin"
+  }
+
+  member {
+    id   = opsgenie_user.second_test_user
+    role = "user"
+  }
+}
