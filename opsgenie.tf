@@ -11,10 +11,12 @@ resource "opsgenie_user" "first_test_user" {
   username = "first_test_user@gmail.com"
   full_name = "First Test User"
   role = "User"
+  timezone  = "Europe/Oslo"
 }
 
 resource "opsgenie_user" "second_test_user" {
   username = "second_test_user@gmail.com"
   full_name = "Second Test User"
   role = "User"
+  timezone  = "Europe/Oslo"
 }
