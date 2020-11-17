@@ -28,12 +28,12 @@ resource "opsgenie_team" "eksam_team" {
   description = "This team is going to handle card api"
 
   member {
-    id   = opsgenie_user.first_test_user
+    id   = opsgenie_user.first_test_user.id
     role = "admin"
   }
 
   member {
-    id   = opsgenie_user.second_test_user
+    id   = opsgenie_user.second_test_user.id
     role = "user"
   }
 }
