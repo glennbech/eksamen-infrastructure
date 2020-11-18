@@ -143,4 +143,6 @@ resource "opsgenie_notification_rule" "test" {
       to = "example@user.com"
     }
   }
+  filter {}
+
 }
