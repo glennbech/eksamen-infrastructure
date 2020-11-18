@@ -127,6 +127,7 @@ resource "opsgenie_notification_rule" "first_user_notification_configuration" {
   username = opsgenie_user.first_test_user.username
   action_type = "schedule-end"
   notification_time = ["just-before", "15-minutes-ago"]
+  filter{}
   steps {
     contact {
       method = "email"
