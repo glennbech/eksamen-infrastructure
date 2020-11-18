@@ -39,7 +39,7 @@ resource "opsgenie_user" "fourth_test_user" {
 #How to use: https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/team
 #Make team of European members. Member are users that are made in previouse stage
 resource "opsgenie_team" "european_eksam_team" {
-  name = "Eksam team"
+  name = "Eu Eksam team"
   description = "This team is going to handle card api"
 
   member {
