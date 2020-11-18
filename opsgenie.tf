@@ -12,9 +12,6 @@ resource "opsgenie_user" "first_test_user" {
   full_name = "First Test User"
   role = "User"
   timezone = "Europe/Oslo"
-  user_details = {
-    phone = "+4712345678"
-  }
 }
 
 resource "opsgenie_user" "second_test_user" {
@@ -137,7 +134,7 @@ resource "opsgenie_notification_rule" "first_user_notification_configuration" {
     }
     contact {
       method = "sms"
-      to = opsgenie_user.first_test_user.user_details.phone # Siden username er egentlig email
+      to = "+4712345678" # Siden username er egentlig email
     }
   }
 }
