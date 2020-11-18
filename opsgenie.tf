@@ -126,9 +126,9 @@ resource "opsgenie_notification_rule" "first_user_notification_configuration" {
   name = "Rules for first user on how to get notifications"
   username = opsgenie_user.first_test_user.username
   action_type = "schedule-end"
+  type = "match-all"
   notification_time = ["just-before", "15-minutes-ago"]
   steps {
-    type = "match-all"
     contact {
       method = "email"
       to = opsgenie_user.first_test_user.username # Siden username er egentlig email
