@@ -11,39 +11,73 @@ resource "opsgenie_user" "first_test_user" {
   username = "first_test_user@gmail.com"
   full_name = "First Test User"
   role = "User"
-  timezone  = "Europe/Oslo"
+  timezone = "Europe/Oslo"
 }
 
 resource "opsgenie_user" "second_test_user" {
   username = "second_test_user@gmail.com"
   full_name = "Second Test User"
   role = "User"
-  timezone  = "Europe/Oslo"
+  timezone = "Europe/Oslo"
 }
 
+resource "opsgenie_user" "third_test_user" {
+  username = "third_test_user@gmail.com"
+  full_name = "Third Test User"
+  role = "User"
+  timezone = "America/Indianapolis"
+}
+
+resource "opsgenie_user" "fourth_test_user" {
+  username = "fourth_test_user@gmail.com"
+  full_name = "Fourth Test User"
+  role = "User"
+  timezone = "America/Indianapolis"
+}
+
+
 #How to use: https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/team
-#Make team of members. Member are users that are made in previouse stage
-resource "opsgenie_team" "eksam_team" {
-  name        = "Eksam team"
+#Make team of European members. Member are users that are made in previouse stage
+resource "opsgenie_team" "european_eksam_team" {
+  name = "Eksam team"
   description = "This team is going to handle card api"
 
   member {
-    id   = opsgenie_user.first_test_user.id
+    id = opsgenie_user.first_test_user.id
     role = "admin"
   }
 
   member {
-    id   = opsgenie_user.second_test_user.id
+    id = opsgenie_user.second_test_user.id
     role = "user"
   }
 }
 
-#How to use:
-resource "opsgenie_alert_policy" "card_alerts" {
-  name               = "card policy"
-  team_id            = opsgenie_team.eksam_team.id
+# Make team of American members
+resource "opsgenie_team" "american_eksam_team" {
+  name = "American eksam team"
+  description = "This team is going to handle card api"
+
+  member {
+    id = opsgenie_user.third_test_user.id
+    role = "user"
+  }
+
+  member {
+    id = opsgenie_user.fourth_test_user.id
+    role = "user"
+  }
+}
+
+# Note: man må betale for å bruke dette funksjonalitet
+# jeg har skjønte litt for seint og valgte å beholde den bare for å vise fram hvordan dette fungerer i teori
+# men dessvare har jeg ikke fått testet den funksjonaliteten
+#How to use: https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/alert_policy
+resource "opsgenie_alert_policy" "card_alerts_eu" {
+  name = "card policy eu"
+  team_id = opsgenie_team.european_eksam_team.id
   policy_description = "This policy is adjusting alerting for card api"
-  message            = "{{message}}"
+  message = "{{message}}"
 
   filter {}
   time_restriction {
@@ -56,30 +90,69 @@ resource "opsgenie_alert_policy" "card_alerts" {
     # This depends on application
     # Some have tu run all time, while other can be down for some time
     restrictions {
-      end_day    = "friday"
-      end_hour   = 23
-      end_min    = 0
-      start_day  = "monday"
+      end_day = "friday"
+      end_hour = 23
+      end_min = 0
+      start_day = "monday"
       start_hour = 6
-      start_min  = 0
+      start_min = 0
     }
     # Get alerts from 8 a clock to 21 a clock on saturday and sunday
     # As it is weekend we get some time to rest
     restrictions {
-      end_day    = "saturday"
-      end_hour   = 21
-      end_min    = 0
-      start_day  = "saturday"
+      end_day = "saturday"
+      end_hour = 21
+      end_min = 0
+      start_day = "saturday"
       start_hour = 8
-      start_min  = 0
+      start_min = 0
     }
     restrictions {
-      end_day    = "sunday"
-      end_hour   = 21
-      end_min    = 0
-      start_day  = "sunday"
-      start_hour = 8
-      start_min  = 0
+      end_day = "sunday"
+      end_hour = 18
+      end_min = 0
+      start_day = "sunday"
+      start_hour = 10
+      start_min = 0
+    }
+  }
+}
+
+resource "opsgenie_schedule" "eu_schedule" {
+  name        = "eu-team-sch"
+  description = "Schedule for european team"
+  timezone    = "Europe/Rome"
+  enabled     = true
+}
+
+resource "opsgenie_schedule" "us_schedule" {
+  name          = "us-team-sch"
+  description   = "Schedule for us team"
+  timezone      = "America/Indianapolis"
+  enabled       = false
+}
+
+resource "opsgenie_schedule_rotation" "eu_schedule_rotation" {
+  schedule_id = opsgenie_schedule.eu_schedule.id
+  name        = "eu-rotation"
+  start_date  = "2019-06-18T17:00:00Z"
+  end_date    = "2019-06-20T17:30:00Z"
+  type        = "hourly"
+  length      = 6
+
+  participant {
+    type = "user"
+    id   = opsgenie_user.first_test_user.id
+  }
+
+  time_restriction {
+    type = "time-of-day"
+
+    restriction {
+      start_hour = 1
+      start_min  = 1
+      end_hour   = 10
+      end_min    = 1
     }
   }
 }
