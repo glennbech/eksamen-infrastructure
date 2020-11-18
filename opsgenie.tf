@@ -12,6 +12,9 @@ resource "opsgenie_user" "first_test_user" {
   full_name = "First Test User"
   role = "User"
   timezone = "Europe/Oslo"
+  user_details = {
+    phone = "+4712345678"
+  }
 }
 
 resource "opsgenie_user" "second_test_user" {
@@ -118,41 +121,23 @@ resource "opsgenie_alert_policy" "card_alerts_eu" {
   }
 }
 
-resource "opsgenie_schedule" "eu_schedule" {
-  name        = "eu-team-sch"
-  description = "Schedule for european team"
-  timezone    = "Europe/Rome"
-  enabled     = true
-}
 
-resource "opsgenie_schedule" "us_schedule" {
-  name          = "us-team-sch"
-  description   = "Schedule for us team"
-  timezone      = "America/Indianapolis"
-  enabled       = false
-}
 
-resource "opsgenie_schedule_rotation" "eu_schedule_rotation" {
-  schedule_id = opsgenie_schedule.eu_schedule.id
-  name        = "eu-rotation"
-  start_date  = "2019-06-18T17:00:00Z"
-  end_date    = "2019-06-20T17:30:00Z"
-  type        = "hourly"
-  length      = 6
-
-  participant {
-    type = "user"
-    id   = opsgenie_user.first_test_user.id
-  }
-
-  time_restriction {
-    type = "time-of-day"
-
-    restriction {
-      start_hour = 1
-      start_min  = 1
-      end_hour   = 10
-      end_min    = 1
+#Manage notifications for user
+# https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/notification_rule
+resource "opsgenie_notification_rule" "first_user_notification_configuration" {
+  name = "Rules for fir user on how to get notifications"
+  username = opsgenie_user.first_test_user.username
+  action_type = "schedule-end"
+  notification_time = ["just-before", "15-minutes-ago"]
+  steps {
+    contact {
+      method = "email"
+      to = opsgenie_user.first_test_user.username # Siden username er egentlig email
+    }
+    contact {
+      method = "sms"
+      to = opsgenie_user.first_test_user.user_details.phone # Siden username er egentlig email
     }
   }
 }
