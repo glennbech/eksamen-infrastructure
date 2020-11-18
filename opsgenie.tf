@@ -128,7 +128,6 @@ resource "opsgenie_notification_rule" "first_user_notification_configuration" {
   action_type = "schedule-end"
   notification_time = ["just-before", "15-minutes-ago"]
   steps {
-    filter{}
     contact {
       method = "email"
       to = opsgenie_user.first_test_user.username # Siden username er egentlig email
