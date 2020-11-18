@@ -119,19 +119,23 @@ resource "opsgenie_alert_policy" "card_alerts_eu" {
 }
 
 
-
 #Manage notifications for user
 # https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/notification_rule
 resource "opsgenie_notification_rule" "first_user_notification_configuration" {
   name = "Rules for first user on how to get notifications"
   username = opsgenie_user.first_test_user.username
   action_type = "schedule-end"
-  criteria = "match-all"
-  notification_time = ["just-before", "15-minutes-ago"]
+  criteria {
+    condition: "match-all"
+  }
+  notification_time = [
+    "just-before",
+    "15-minutes-ago"]
   steps {
     contact {
       method = "email"
-      to = "first_test_user@gmail.com" # Siden username er egentlig email
+      to = "first_test_user@gmail.com"
+      # Siden username er egentlig email
     }
   }
 }
