@@ -2,7 +2,6 @@
 provider "opsgenie" {
   api_key = var.opsgenie_key
   api_url = "api.eu.opsgenie.com"
-  #default is api.opsgenie.com
 }
 
 #How to use: https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/user
