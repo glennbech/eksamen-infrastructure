@@ -123,7 +123,7 @@ resource "opsgenie_alert_policy" "card_alerts_eu" {
 #Manage notifications for user
 # https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/notification_rule
 resource "opsgenie_notification_rule" "first_user_notification_configuration" {
-  name = "Rules for fir user on how to get notifications"
+  name = "Rules for first user on how to get notifications"
   username = opsgenie_user.first_test_user.username
   action_type = "schedule-end"
   notification_time = ["just-before", "15-minutes-ago"]
@@ -131,10 +131,6 @@ resource "opsgenie_notification_rule" "first_user_notification_configuration" {
     contact {
       method = "email"
       to = opsgenie_user.first_test_user.username # Siden username er egentlig email
-    }
-    contact {
-      method = "sms"
-      to = "+4712345678" # Siden username er egentlig email
     }
   }
 }
