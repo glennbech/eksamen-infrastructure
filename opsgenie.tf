@@ -131,18 +131,3 @@ resource "opsgenie_notification_policy" "eu_team_notification_policy" {
   }
   filter {}
 }
-
-resource "opsgenie_notification_rule" "test" {
-  name = "Example notification rule"
-  username = opsgenie_user.first_test_user.id
-  action_type = "schedule-end"
-  notification_time = ["just-before", "15-minutes-ago"]
-  steps {
-    contact {
-      method = "email"
-      to = "example@user.com"
-    }
-  }
-  filter {}
-
-}
