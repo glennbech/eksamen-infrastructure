@@ -125,7 +125,7 @@ resource "opsgenie_alert_policy" "card_alerts_eu" {
 resource "opsgenie_notification_rule" "first_user_notification_configuration" {
   name = "Rules for first user on how to get notifications"
   username = opsgenie_user.first_test_user.username
-  action_type = "match-all"
+  action_type = "schedule-end"
   notification_time = ["just-before", "15-minutes-ago"]
   steps {
     contact {
