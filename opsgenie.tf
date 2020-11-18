@@ -120,19 +120,14 @@ resource "opsgenie_alert_policy" "card_alerts_eu" {
 
 
 #Manage notifications for user
-# https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/notification_rule
-resource "opsgenie_notification_rule" "first_user_notification_configuration" {
-  name = "Rules for first user on how to get notifications"
-  username = opsgenie_user.first_test_user.username
-  action_type = "schedule-end"
-  notification_time = [
-    "just-before",
-    "15-minutes-ago"]
-  steps {
-    contact {
-      method = "email"
-      to = "first_test_user@gmail.com"
-      # Siden username er egentlig email
-    }
+resource "opsgenie_notification_policy" "test" {
+  name = "example policy"
+  team_id = opsgenie_team.european_eksam_team.id
+  policy_description = "This policy has a delay action"
+  delay_action {
+    delay_option = "next-time"
+    until_minute = 1
+    until_hour = 9
   }
+  filter {}
 }
