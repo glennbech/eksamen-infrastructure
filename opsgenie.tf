@@ -119,7 +119,8 @@ resource "opsgenie_alert_policy" "card_alerts_eu" {
 }
 
 
-#Manage notifications for user
+#Manage notifications for team
+#How to use: https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/notification_policy
 resource "opsgenie_notification_policy" "eu_team_notification_policy" {
   name = "European notifications policy"
   team_id = opsgenie_team.european_eksam_team.id
