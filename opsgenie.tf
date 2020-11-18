@@ -120,8 +120,8 @@ resource "opsgenie_alert_policy" "card_alerts_eu" {
 
 
 #Manage notifications for user
-resource "opsgenie_notification_policy" "test" {
-  name = "example policy"
+resource "opsgenie_notification_policy" "eu_team_notification_policy" {
+  name = "European notifications policy"
   team_id = opsgenie_team.european_eksam_team.id
   policy_description = "This policy has a delay action"
   delay_action {
@@ -130,4 +130,17 @@ resource "opsgenie_notification_policy" "test" {
     until_hour = 9
   }
   filter {}
+}
+
+resource "opsgenie_notification_rule" "test" {
+  name = "Example notification rule"
+  username = opsgenie_user.first_test_user.id
+  action_type = "schedule-end"
+  notification_time = ["just-before", "15-minutes-ago"]
+  steps {
+    contact {
+      method = "email"
+      to = "example@user.com"
+    }
+  }
 }
