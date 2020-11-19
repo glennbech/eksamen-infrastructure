@@ -18,8 +18,3 @@ variable "project_id" {
 locals {
   gcp_json_data = jsondecode(file("${path.module}/google-key.json"))
 }
-
-output "gcp-key" {
-  value = local.gcp_json_data
-}
-
