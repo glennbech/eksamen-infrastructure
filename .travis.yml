@@ -22,7 +22,6 @@ before_install:
 install: true
 script:
 - set -ex;
-- echo $GOOGLE_APPLICATION_CREDENTIALS
 - export TF_VAR_statuscake_key=$(gcloud secrets versions access latest --secret=STATUSCAKE_KEY)
 - export TF_VAR_opsgenie_key=$(gcloud secrets versions access latest --secret=OPSGENIE_KEY)
 - export TF_VAR_logz_token=$LOGZ_TOKEN
