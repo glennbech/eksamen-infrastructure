@@ -73,8 +73,6 @@ resource "opsgenie_notification_policy" "card_alerts_us" {
   name = "card policy us"
   team_id = opsgenie_team.american_eksam_team.id
   policy_description = "This policy is adjusting alerting for card api"
-  message = "{{message}}"
-
   filter {}
   time_restriction {
     type = "time-of-day"
