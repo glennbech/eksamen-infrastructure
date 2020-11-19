@@ -3,5 +3,3 @@ resource "google_storage_bucket" "tf-state" {
   name = "eksamen-terraform-state-bucket"
   location = "EU"
 }
-
-
