@@ -26,8 +26,8 @@ script:
   - export TF_VAR_statuscake_key=$(gcloud secrets versions access latest --secret=STATUSCAKE_KEY)
   - export TF_VAR_opsgenie_key=$(gcloud secrets versions access latest --secret=OPSGENIE_KEY)
   - export TF_VAR_logz_token=$LOGZ_TOKEN
-  - terraform force-unlock -force 1605741148935245
+  - terraform refresh -lock=false
   - terraform init
-  - terraform plan -lock=false
+  - terraform plan
   - terraform apply --auto-approve
   - terraform output
