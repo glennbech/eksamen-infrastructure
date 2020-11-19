@@ -20,4 +20,7 @@ resource "google_monitoring_uptime_check_config" "uptime-check" {
   content_matchers {
     content = "Wellcome to homepage"
   }
+  lifecycle {
+    create_before_destroy = true
+  }
 }
