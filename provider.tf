@@ -1,10 +1,4 @@
-terraform {
-  backend "gcs" {
-    bucket = "eksamen-terraform-state"
-    prefix = "tf-state"
-    credentials = "google-key.json"
-  }
-}
+
 
 provider "google-beta" {
   credentials = file("google-key.json")
