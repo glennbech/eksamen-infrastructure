@@ -84,6 +84,12 @@ resource "opsgenie_notification_policy" "card_alerts_us" {
       end_min = 0
     }
   }
+  delay_action {
+    delay_option = "for-duration"
+    duration {
+      time_amount = 0
+    }
+  }
 }
 
 #Manage notifications for team
