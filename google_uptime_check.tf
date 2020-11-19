@@ -15,6 +15,7 @@ resource "google_monitoring_uptime_check_config" "uptime-check" {
       host       = google_cloud_run_service.cards.status[0].url
     }
   }
+  project = var.project_id
 
   content_matchers {
     content = "Wellcome to homepage"
