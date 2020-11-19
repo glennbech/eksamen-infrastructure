@@ -11,11 +11,10 @@ resource "google_monitoring_uptime_check_config" "uptime-check" {
   monitored_resource {
     type = "uptime_url"
     labels = {
-      project_id = var.project_id
+      project_id = "devops-examen-2020"
       host       = google_cloud_run_service.cards.status[0].url
     }
   }
-  project = var.project_id
 
   content_matchers {
     content = "Wellcome to homepage"
