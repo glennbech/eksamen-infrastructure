@@ -1,5 +1,10 @@
 [![Build Status](https://travis-ci.com/guberArmin/eksamen-infrastructure.svg?token=m6BpjWymm3UWnZ6QxDwC&branch=main)](https://travis-ci.com/guberArmin/eksamen-infrastructure)
 
+# Innholdsfortegnelse
+- [Konfigurasjon av hemligheter - infrastruktur](#konfigurasjon-av-hemligheter---infrastruktur)
+- [Om infrastruktur](#om-infrastruktur)
+  * [Opsgenie](#opsgenie)
+
 ## Konfigurasjon av hemligheter - infrastruktur
 - logz.io token: `travis encrypt LOGZ_TOKEN=<your-token> --add`
 - statuscake key: `travis encrypt STATUSCAKE_KEY=<your-key> --add`  
@@ -38,5 +43,7 @@ Men jeg valgte å beholde infrastrukturen jeg har laget. Fordi terraform klare �
 det handler om betalt funksjonalitet.
 
 Også bruker jeg `opsgenie_notification_policy` for europeisk lag med en delay, slik at Amerikansk lag får 
-tid til å prøve å fixe
+30 minutter for å prøve å fikse feilen.
+
+
 

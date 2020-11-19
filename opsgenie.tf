@@ -68,17 +68,33 @@ resource "opsgenie_team" "american_eksam_team" {
   }
 }
 
-# Note: man må betale for å bruke dette funksjonalitet
-# jeg har skjønte litt for seint og valgte å beholde den bare for å vise fram hvordan dette fungerer i teori
-# men dessvare har jeg ikke fått testet den funksjonaliteten
-#How to use: https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/alert_policy
-resource "opsgenie_alert_policy" "card_alerts_eu" {
-  name = "card policy eu"
-  team_id = opsgenie_team.european_eksam_team.id
+#American team
+resource "opsgenie_notification_policy" "card_alerts_us" {
+  name = "card policy us"
+  team_id = opsgenie_team.american_eksam_team.id
   policy_description = "This policy is adjusting alerting for card api"
   message = "{{message}}"
 
   filter {}
+  time_restriction {
+    type = "time-of-day"
+    #De jobber hver dag fra 8 til 23
+    restriction {
+      start_hour = 8
+      start_min = 0
+      end_hour = 23
+      end_min = 0
+    }
+  }
+}
+
+#Manage notifications for team
+#How to use: https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/notification_policy
+resource "opsgenie_notification_policy" "eu_team_notification_policy" {
+  name = "European notifications policy"
+  team_id = opsgenie_team.european_eksam_team.id
+  policy_description = "This policy has a delay action"
+
   time_restriction {
     type = "weekday-and-time-of-day"
     # From 6 a clock on monday
@@ -115,40 +131,12 @@ resource "opsgenie_alert_policy" "card_alerts_eu" {
       start_min = 0
     }
   }
-}
-
-#American team
-resource "opsgenie_alert_policy" "card_alerts_us" {
-  name = "card policy us"
-  team_id = opsgenie_team.american_eksam_team.id
-  policy_description = "This policy is adjusting alerting for card api"
-  message = "{{message}}"
-
-  filter {}
-  time_restriction {
-    type = "time-of-day"
-    #De jobber hver dag fra 8 til 23
-    restriction {
-      start_hour = 8
-      start_min = 0
-      end_hour = 23
-      end_min = 0
-    }
-  }
-}
-
-
-#Manage notifications for team
-#How to use: https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/notification_policy
-resource "opsgenie_notification_policy" "eu_team_notification_policy" {
-  name = "European notifications policy"
-  team_id = opsgenie_team.european_eksam_team.id
-  policy_description = "This policy has a delay action"
   delay_action {
     delay_option = "for-duration"
     duration {
       time_amount = 30
     }
   }
+
   filter {}
 }
