@@ -87,7 +87,7 @@ resource "opsgenie_notification_policy" "card_alerts_us" {
   delay_action {
     delay_option = "for-duration"
     duration {
-      time_amount = 0
+      time_amount = 1
     }
   }
 }
