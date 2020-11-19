@@ -11,3 +11,7 @@ variable "opsgenie_key" {}
 variable "project_id" {
   default = "devops-examen-2020"
 }
+
+variable "logz_url" {
+  default="https://listener.logz.io:8071"
+}

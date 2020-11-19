@@ -10,3 +10,6 @@
     - Add new API key
     - Velg navn
     - Read, Create and Update, Delete, Configuration Access for api key
+
+
+- logz.io token: `travis encrypt LOGZ_TOKEN=<your-token> --add`
