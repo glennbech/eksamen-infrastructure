@@ -117,6 +117,26 @@ resource "opsgenie_alert_policy" "card_alerts_eu" {
   }
 }
 
+#American team
+resource "opsgenie_alert_policy" "card_alerts_us" {
+  name = "card policy us"
+  team_id = opsgenie_team.american_eksam_team.id
+  policy_description = "This policy is adjusting alerting for card api"
+  message = "{{message}}"
+
+  filter {}
+  time_restriction {
+    type = "time-of-day"
+    #De jobber hver dag fra 8 til 23
+    restriction {
+      start_hour = 8
+      start_min = 0
+      end_hour = 23
+      end_min = 0
+    }
+  }
+}
+
 
 #Manage notifications for team
 #How to use: https://registry.terraform.io/providers/opsgenie/opsgenie/latest/docs/resources/notification_policy
@@ -125,9 +145,10 @@ resource "opsgenie_notification_policy" "eu_team_notification_policy" {
   team_id = opsgenie_team.european_eksam_team.id
   policy_description = "This policy has a delay action"
   delay_action {
-    delay_option = "next-time"
-    until_minute = 1
-    until_hour = 9
+    delay_option = "for-duration"
+    duration {
+      time_amount = 30
+    }
   }
   filter {}
 }
