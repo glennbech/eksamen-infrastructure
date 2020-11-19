@@ -1,3 +1,9 @@
+provider "datadog" {
+  api_key = var.api_key
+  app_key = var.app_key
+}
+
+
 # Create a new Datadog - Google Cloud Platform integration
 resource "datadog_integration_gcp" "awesome_gcp_project_integration" {
   project_id     = local.gcp_json_data.project_id
