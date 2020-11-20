@@ -61,3 +61,24 @@ resource "pagerduty_team_membership" "american_members_v2" {
   team_id = pagerduty_team.american_team.id
   role    = "responder"
 }
+
+
+resource "pagerduty_schedule" "american_schedule" {
+  name      = "Daily Engineering Rotation"
+  time_zone = "America/New_York"
+
+  layer {
+    name                         = "Night Shift"
+    start                        = "2015-11-06T20:00:00-05:00"
+    rotation_virtual_start       = "2015-11-06T20:00:00-05:00"
+    rotation_turn_length_seconds = 86400
+    users                        = [pagerduty_user.third_user.id,pagerduty_user.fourth_user.id]
+
+    #Free for 32400 seconds(9 hours) from 8
+    restriction {
+      type              = "daily_restriction"
+      start_time_of_day = "08:00:00"
+      duration_seconds  = 32400
+    }
+  }
+}
