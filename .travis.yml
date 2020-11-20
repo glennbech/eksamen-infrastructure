@@ -31,5 +31,5 @@ script:
 - export TF_VAR_pagerduty_token=$PAGERDUTY_TOKEN
 - terraform init
 - terraform plan -lock=false
-- terraform apply --auto-approve
+- terraform apply --auto-approve -lock=false
 - terraform output
