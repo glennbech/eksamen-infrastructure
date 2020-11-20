@@ -94,8 +94,8 @@ resource "pagerduty_schedule" "european_schedule" {
     rotation_virtual_start = "2020-11-06T20:00:00-05:00"
     rotation_turn_length_seconds = 86400
     users = [
-      pagerduty_user.third_user.id,
-      pagerduty_user.fourth_user.id]
+      pagerduty_user.first_user.id,
+      pagerduty_user.second_user.id]
 
     #Start at 8 and work next 32400 seconds (9 hours)
     restriction {
