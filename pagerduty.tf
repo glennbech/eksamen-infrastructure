@@ -114,12 +114,7 @@ resource "pagerduty_escalation_policy" "eu_escalation_policy" {
   rule {
     escalation_delay_in_minutes = 10
     target {
-      type = "user"
-      id   = pagerduty_user.first_user.id
-    }
-    target {
-      type = "user"
-      id   = pagerduty_user.second_user.id
+      id = pagerduty_schedule.european_schedule.id
     }
   }
 }
