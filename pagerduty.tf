@@ -120,8 +120,8 @@ resource "pagerduty_escalation_policy" "eu_escalation_policy" {
   }
 }
 
-resource "pagerduty_escalation_policy" "us_escalation_policy_v2" {
-  name      = "Engineering Escalation Policy"
+resource "pagerduty_escalation_policy" "us_escalation_policy" {
+  name      = "US Engineering Escalation Policy "
   num_loops = 2
   teams     = [pagerduty_team.american_team.id]
   description = "Escalation policy for US team"
