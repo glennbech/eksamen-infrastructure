@@ -80,7 +80,7 @@ resource "pagerduty_schedule" "american_schedule" {
     restriction {
       type = "daily_restriction"
       start_time_of_day = "08:00:00"
-      duration_seconds = 32400
+      duration_seconds = 43200
     }
   }
 }
@@ -101,7 +101,7 @@ resource "pagerduty_schedule" "european_schedule" {
     restriction {
       type = "daily_restriction"
       start_time_of_day = "08:00:00"
-      duration_seconds = 32400
+      duration_seconds = 43200
     }
   }
 }
