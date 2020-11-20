@@ -105,3 +105,21 @@ resource "pagerduty_schedule" "european_schedule" {
     }
   }
 }
+
+resource "pagerduty_escalation_policy" "eu_escalation_policy" {
+  name      = "Engineering Escalation Policy"
+  num_loops = 2
+  teams     = [pagerduty_team.european_team.id]
+
+  rule {
+    escalation_delay_in_minutes = 10
+    target {
+      type = "user"
+      id   = pagerduty_user.first_user.id
+    }
+    target {
+      type = "user"
+      id   = pagerduty_user.second_user.id
+    }
+  }
+}
