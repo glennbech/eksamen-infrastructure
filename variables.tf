@@ -7,6 +7,7 @@ variable "statuscake_key" {
 
 variable "opsgenie_key" {}
 
+variable "pagerduty_token" {}
 
 variable "project_id" {
   default = "devops-examen-2020"
