@@ -8,6 +8,10 @@ resource "pagerduty_team" "european_team" {
   name = "European team"
   description = "Main team from EU"
 }
+resource "pagerduty_team" "american_team" {
+  name = "American team"
+  description = "Backup team from USA"
+}
 
 # Create a PagerDuty user
 resource "pagerduty_user" "first_user" {
@@ -44,5 +48,16 @@ resource "pagerduty_team_membership" "european_members_v1" {
 resource "pagerduty_team_membership" "european_members_v2" {
   user_id = pagerduty_user.second_user.id
   team_id = pagerduty_team.european_team.id
+  role    = "responder"
+}
+
+resource "pagerduty_team_membership" "american_members_v1" {
+  user_id = pagerduty_user.third_user.id
+  team_id = pagerduty_team.american_team.id
+  role    = "responder"
+}
+resource "pagerduty_team_membership" "american_members_v2" {
+  user_id = pagerduty_user.second_user.id
+  team_id = pagerduty_team.american_team.id
   role    = "responder"
 }
