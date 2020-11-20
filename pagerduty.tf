@@ -65,7 +65,7 @@ resource "pagerduty_team_membership" "american_members_v2" {
 
 resource "pagerduty_schedule" "american_schedule" {
   name = "Daily Engineering Rotation US"
-  time_zone = "America/Honolulu"
+  time_zone = "America/Phoenix"
   description = "Late shift relative to EU team"
   layer {
     name = "Late Shift"
@@ -79,7 +79,7 @@ resource "pagerduty_schedule" "american_schedule" {
     #Start at 8 and work next 32400 seconds (9 hours)
     restriction {
       type = "daily_restriction"
-      start_time_of_day = "08:00:00"
+      start_time_of_day = "12:00:00"
       duration_seconds = 43200
     }
   }
