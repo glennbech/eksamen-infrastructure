@@ -43,42 +43,65 @@ resource "pagerduty_user" "fourth_user" {
 resource "pagerduty_team_membership" "european_members_v1" {
   user_id = pagerduty_user.first_user.id
   team_id = pagerduty_team.european_team.id
-  role    = "manager"
+  role = "manager"
 }
 resource "pagerduty_team_membership" "european_members_v2" {
   user_id = pagerduty_user.second_user.id
   team_id = pagerduty_team.european_team.id
-  role    = "responder"
+  role = "responder"
 }
 
 resource "pagerduty_team_membership" "american_members_v1" {
   user_id = pagerduty_user.third_user.id
   team_id = pagerduty_team.american_team.id
-  role    = "responder"
+  role = "responder"
 }
 resource "pagerduty_team_membership" "american_members_v2" {
   user_id = pagerduty_user.second_user.id
   team_id = pagerduty_team.american_team.id
-  role    = "responder"
+  role = "responder"
 }
 
 
 resource "pagerduty_schedule" "american_schedule" {
-  name      = "Daily Engineering Rotation"
-  time_zone = "America/New_York"
-
+  name = "Daily Engineering Rotation US"
+  time_zone = "America/Phoenix"
+  description = "Late shift relative to EU team"
   layer {
-    name                         = "Night Shift"
-    start                        = "2015-11-06T20:00:00-05:00"
-    rotation_virtual_start       = "2015-11-06T20:00:00-05:00"
+    name = "Late Shift"
+    start = "2020-11-06T20:00:00-05:00"
+    rotation_virtual_start = "2020-11-06T20:00:00-05:00"
     rotation_turn_length_seconds = 86400
-    users                        = [pagerduty_user.third_user.id,pagerduty_user.fourth_user.id]
+    users = [
+      pagerduty_user.third_user.id,
+      pagerduty_user.fourth_user.id]
 
-    #Free for 32400 seconds(9 hours) from 8
+    #Start at 8 and work next 32400 seconds (9 hours)
     restriction {
-      type              = "daily_restriction"
+      type = "daily_restriction"
       start_time_of_day = "08:00:00"
-      duration_seconds  = 32400
+      duration_seconds = 32400
+    }
+  }
+}
+resource "pagerduty_schedule" "european_schedule" {
+  name = "Daily Engineering Rotation EU"
+  time_zone = "Europe/Berlin"
+  description = "Day shift"
+  layer {
+    name = "Day Shift"
+    start = "2020-11-06T20:00:00-05:00"
+    rotation_virtual_start = "2020-11-06T20:00:00-05:00"
+    rotation_turn_length_seconds = 86400
+    users = [
+      pagerduty_user.third_user.id,
+      pagerduty_user.fourth_user.id]
+
+    #Start at 8 and work next 32400 seconds (9 hours)
+    restriction {
+      type = "daily_restriction"
+      start_time_of_day = "08:00:00"
+      duration_seconds = 32400
     }
   }
 }
