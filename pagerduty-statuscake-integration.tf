@@ -1,5 +1,5 @@
 resource "pagerduty_service" "eu_service" {
-  name                    = "My Web App"
+  name                    = "Eksamen web app"
   auto_resolve_timeout    = 14400
   acknowledgement_timeout = 600
   escalation_policy       = pagerduty_escalation_policy.eu_escalation_policy.id
