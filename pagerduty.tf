@@ -118,4 +118,16 @@ resource "pagerduty_escalation_policy" "eu_escalation_policy" {
       id = pagerduty_schedule.european_schedule.id
     }
   }
+}resource "pagerduty_escalation_policy" "us_escalation_policy" {
+  name      = "Engineering Escalation Policy"
+  num_loops = 2
+  teams     = [pagerduty_team.american_team.id]
+  description = "Escalation policy for US team"
+  rule {
+    escalation_delay_in_minutes = 10
+    target {
+      type = "schedule"
+      id = pagerduty_schedule.american_schedule.id
+    }
+  }
 }
