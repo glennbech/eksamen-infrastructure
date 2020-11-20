@@ -65,7 +65,7 @@ resource "pagerduty_team_membership" "american_members_v2" {
 
 resource "pagerduty_schedule" "american_schedule" {
   name = "Daily Engineering Rotation US"
-  time_zone = "America/Phoenix"
+  time_zone = "America/Honolulu"
   description = "Late shift relative to EU team"
   layer {
     name = "Late Shift"
