@@ -28,6 +28,7 @@ script:
 - export TF_VAR_statuscake_key=$STATUSCAKE_KEY
 - export TF_VAR_opsgenie_key=$OPSGENIE_KEY
 - export TF_VAR_logz_token=$LOGZ_TOKEN
+- export TF_VAR_pagerduty_token=$PAGERDUTY_TOKEN
 - terraform init
 - terraform plan
 - terraform apply --auto-approve
