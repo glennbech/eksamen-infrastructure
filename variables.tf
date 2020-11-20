@@ -9,6 +9,8 @@ variable "opsgenie_key" {}
 
 variable "pagerduty_token" {}
 
+variable "azure_password" {}
+
 variable "project_id" {
   default = "devops-examen-2020"
 }
