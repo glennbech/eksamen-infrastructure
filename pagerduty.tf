@@ -114,6 +114,7 @@ resource "pagerduty_escalation_policy" "eu_escalation_policy" {
   rule {
     escalation_delay_in_minutes = 10
     target {
+      type = "schedule"
       id = pagerduty_schedule.european_schedule.id
     }
   }
