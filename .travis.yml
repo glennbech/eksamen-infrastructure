@@ -25,10 +25,8 @@ install: true
 script:
 - set -ex;
 - export TF_VAR_statuscake_key=$STATUSCAKE_KEY
-- export TF_VAR_opsgenie_key=$OPSGENIE_KEY
 - export TF_VAR_logz_token=$LOGZ_TOKEN
 - export TF_VAR_pagerduty_token=$PAGERDUTY_TOKEN
-- export TF_VAR_azure_password=$AZURE_PASSWORD
 - terraform init
 - terraform plan
 - terraform apply --auto-approve

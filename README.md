@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/guberArmin/eksamen-infrastructure.svg?token=m6BpjWymm3UWnZ6QxDwC&branch=main)](https://travis-ci.com/guberArmin/eksamen-infrastructure)
 
-<svg><path d="M3 21H11V13H3M5 15H9V19H5M3 11H11V3H3M5 5H9V9H5M13 3V11H21V3M19 9H15V5H19M18 16H21V18H18V21H16V18H13V16H16V13H18Z"></path></svg>
+
 # Innholdsfortegnelse
 - [Konfigurasjon av hemmeligheter - infrastruktur](#konfigurasjon-av-hemligheter---infrastruktur)
 - [Om infrastruktur](#om-infrastruktur)
@@ -10,6 +10,11 @@
 - logz.io token: `travis encrypt LOGZ_TOKEN=<your-token> --add`
 - statuscake key: `travis encrypt STATUSCAKE_KEY=<your-key> --add`  
 - Pagerduty key: `travis encrypt PAGERDUTY_TOKEN=<your-key> --add`  
+    - For å opprette nøkkelen til pagerduty må man gjøre følgende:
+        - Man trykker på `API access` under icone ![Addon ikone](./doc/addon_img.png "Addon ikone")
+        - `Create new API key`
+        - Velge navn for nøkkelen
+        - Trykk på `Create Key`
 - Man kan bruke GCP service account som brukes på [applikasjon repoen](https://github.com/guberArmin/devops-exam#konfigurasjon-av-hemligheter---applikasjon).
 - I `.travis.yml` endre på  `GCP_PROJECT_ID=<project-id>`
 
