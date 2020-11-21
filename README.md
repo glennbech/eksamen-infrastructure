@@ -1,5 +1,10 @@
 [![Build Status](https://travis-ci.com/guberArmin/eksamen-infrastructure.svg?token=m6BpjWymm3UWnZ6QxDwC&branch=main)](https://travis-ci.com/guberArmin/eksamen-infrastructure)
 
+# Devops 2020 eksamen - Infrastruktur
+Dette er infrastruktur repository til `Devops i Skyen [PGR301-1 20H]` eksamen.
+
+Applikasjon repoen finnes [her](https://github.com/guberArmin/eksamen-infrastructure).
+
 
 # Innholdsfortegnelse
 - [Konfigurasjon av hemmeligheter - infrastruktur](#konfigurasjon-av-hemmeligheter---infrastruktur)
@@ -26,20 +31,20 @@ Alle hemligheter fra `travis` lagres i `variables.tf`, i løpe av bygge prossese
 
 ### Pagerduty
 
-Terraform doukmentasjon finner man [her](https://registry.terraform.io/providers/PagerDuty/pagerduty/latest/docs)
+Terraform doukmentasjon finner man [her](https://registry.terraform.io/providers/PagerDuty/pagerduty/latest/docs).
 
 Her valgte jeg å opprette 4 brukere. To av dem er fra Europa og to er fra Amerika.
 
-Da oppretter jeg 2 lag, en Europeisk og en Amerikansk og legger inn i de tilsvarende brukere.
+Da oppretter jeg 2 lag, en Europeisk og en Amerikansk. Og tildeler dem tilsvarende brukere.
 
 Jeg lager schedule til hver lag. Det jeg har tenkt er at Europeisk lag skal ha ansvar for drift av applikasjon fra 07:00 til 19:00 hver dag (lokal tid).
 Mens amerikansk lag skal drifte applikasjon fra 19:00 til 07:00 neste dagen (europeisk tid). Det vil si, etter
 at man har tatt tidssoner i beregning, at de starter 12:00 og jobber til 00:00 lokal tid. På denne måten ingen av
 lag må jobbe etter 00:00.
 
-Til slutt lager jeg escalation policy for å håndtere måten lag skal varsles på.
+Til slutt lager jeg escalation policy for å håndtere måten lagene skal varsles på.
 
-For å integrere statuscake med pagerduty har je oprettet `pagerduty-statuscake-integration.tf`. Her oppretter
+For å integrere `statuscake` med pagerduty har je oprettet `pagerduty-statuscake-integration.tf`. Her oppretter
 jeg infrastrukturen på pagerduty sin side som trenges for å integrere den med statuscake.
 
 Integrasjon med statuscake fuflføres på følgende måten:
@@ -60,7 +65,7 @@ Jeg har testet alt grundig og fant ikke noen feil med infrastrukturen.
 Jeg har, en gang i starten av utvikling av dette prosjektet, fått melding 
 `terraform multiple providers trying to lock state file` i travis.
 Det viste seg at hvis man gjør flere push i kort tidsperiode og travis har de i 
-qø kan det hende at `lock state` blir ikke ryddet opp før neste bygg starter. 
+qø kan det hende at `lock state` blir ikke ryddet opp før neste bygge starter. 
 Hvis dette oppstår da kan man bruke 
 [force-unlock -force](https://www.terraform.io/docs/commands/force-unlock.html)
 eller i `eksamen-terraform-state` bucket på google cloud console slette lock filen manuelt.
