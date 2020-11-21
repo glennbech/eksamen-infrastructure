@@ -47,6 +47,8 @@ Til slutt lager jeg escalation policy for å håndtere måten lagene skal varsle
 For å integrere `statuscake` med pagerduty har je oprettet `pagerduty-statuscake-integration.tf`. Her oppretter
 jeg infrastrukturen på pagerduty sin side som trenges for å integrere den med statuscake.
 
+Skjermbildet av slutt resultate kan man se [her](./doc/pagerduty.png)
+
 Integrasjon med statuscake fuflføres på følgende måten:
 - Først skal vi bruke informasjon fra infrastrukturen som er opprettet av terraform
     - Loggin på [PagerDuty](https://www.pagerduty.com/)
