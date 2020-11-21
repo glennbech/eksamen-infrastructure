@@ -8,9 +8,3 @@ provider "azurerm" {
   client_secret   = var.azure_password
   tenant_id       = "ecf620ff-452b-498d-80a3-7724532966ca"
 }
-
-# Create a resource group
-resource "azurerm_resource_group" "exam_rg" {
-  name     = "exam-resources-group"
-  location = "West Europe"
-}
