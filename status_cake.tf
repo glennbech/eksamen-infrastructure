@@ -9,4 +9,5 @@ resource "statuscake_test" "google_status_cake" {
   test_type    = "HTTP"
   check_rate   = 100
   contact_group = ["194947"]
+  find_string = "Wellcome to homepage"
 }
