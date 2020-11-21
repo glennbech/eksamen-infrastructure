@@ -22,7 +22,7 @@
 ## Om infrastruktur
 Terraform state lagres i google cloud bucket.
 
-Alle hemligheter fra `travis` lagres i `variables.tf` ved å bruke `export TF_VAR...`.
+Alle hemligheter fra `travis` lagres i `variables.tf`, i løpe av bygge prossesen, ved å bruke `export TF_VAR...`.
 
 ### Pagerduty
 
@@ -62,7 +62,7 @@ Jeg har, en gang i starten av utvikling av dette prosjektet, fått melding
 Det viste seg at hvis man gjør flere push i kort tidsperiode og travis har de i 
 qø kan det hende at `lock state` blir ikke ryddet opp før neste bygg starter. 
 Hvis dette oppstår da kan man bruke 
-[--force-unlock](https://www.terraform.io/docs/commands/force-unlock.html)
+[force-unlock -force](https://www.terraform.io/docs/commands/force-unlock.html)
 eller i `eksamen-terraform-state` bucket på google cloud console slette lock filen manuelt.
 
 
