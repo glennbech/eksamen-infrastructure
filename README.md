@@ -25,9 +25,11 @@ Alle hemligheter er lagret i `variables.tf`.
 
 ### Pagerduty
 
+Terraform doukmentasjon finner man [her](https://registry.terraform.io/providers/PagerDuty/pagerduty/latest/docs)
+
 Her valgte jeg å opprette 4 brukere. To av dem er fra Europa og to er fra Amerika.
 
-Da oppretter jeg 2 lag, en Europeisk og en Amerikansk.
+Da oppretter jeg 2 lag, en Europeisk og en Amerikansk og legger inn i de tilsvarende brukere.
 
 Jeg lager schedule til hver lag. Det jeg har tenkt er at Europeisk lag skal ha ansvar for drift av applikasjon fra 07:00 til 19:00 hver dag (lokal tid).
 Mens amerikansk lag skal drifte applikasjon fra 19:00 til 07:00 neste dagen (europeisk tid). Det vil si, etter
@@ -46,9 +48,9 @@ Integrasjon med statuscake fuflføres på følgende måten:
     - Nå kommer du til å se `Eksamen web app - statuscake` service
     - Der trykker man på `More` og `View integrations` 
     - I nå varende vindu kopierer man `Integration key`
-- Neste steg er konfigurering av status cake. For å gjøre det [her](https://www.pagerduty.com/docs/guides/statuscake-integration-guide/).
+- Neste steg er konfigurering av status cake.
 For å fullføre integrering med statuscake må man fullføre stegene beskrevet [her](https://www.pagerduty.com/docs/guides/statuscake-integration-guide/) 
 under `In StatusCake` avsnitte.
 
-# Error: Error locking state
+## Error: Error locking state
 default.tflock
