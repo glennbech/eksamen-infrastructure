@@ -12,5 +12,6 @@ variable "project_id" {
 }
 
 variable "logz_url" {
+
   default="https://listener.logz.io:8071"
 }
