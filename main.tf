@@ -6,7 +6,7 @@ resource "google_cloud_run_service" "cards" {
   template {
     spec {
       containers {
-        image = "gcr.io/devops-examen-2020/card@sha256:876edc796a3c6edd0ee32fca3b3b9aad39e309c6db3e1b1bc79fdabb8f3f36d2"
+        image = "gcr.io/devops-examen-2020/card@sha256:4ee141576efb16e9c61c666072552f0608634e4f04786fdb477569a61252d608"
         env {
           name = "LOGZ_TOKEN"
           value = var.logz_token
