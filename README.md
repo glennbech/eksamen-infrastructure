@@ -3,7 +3,7 @@
 # Devops 2020 eksamen - Infrastruktur
 Dette er infrastruktur repository til `Devops i Skyen [PGR301-1 20H]` eksamen.
 
-Applikasjon repoen finnes [her](https://github.com/guberArmin/eksamen-infrastructure).
+Applikasjon repoen finnes [her](https://github.com/guberArmin/devops-exam).
 
 
 # Innholdsfortegnelse
