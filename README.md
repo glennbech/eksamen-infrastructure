@@ -2,7 +2,7 @@
 
 
 # Innholdsfortegnelse
-- [Konfigurasjon av hemmeligheter - infrastruktur](#konfigurasjon-av-hemligheter---infrastruktur)
+- [Konfigurasjon av hemmeligheter - infrastruktur](#konfigurasjon-av-hemmeligheter---infrastruktur)
 - [Om infrastruktur](#om-infrastruktur)
   * [Pagerduty](#pagerduty)
 
